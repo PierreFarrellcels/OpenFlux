@@ -1,4 +1,4 @@
-//go:build !darwin && !windows
+//go:build !darwin && !windows && !linux
 
 package main
 
@@ -9,7 +9,7 @@ import (
 	"github.com/p1neappleXpress/OpenFlux/transport"
 )
 
-var errTUNUnsupported = errors.New("utun client is only supported on macOS")
+var errTUNUnsupported = errors.New("полный туннель есть только в macOS, Windows и Linux")
 
 type TUNClient struct{}
 

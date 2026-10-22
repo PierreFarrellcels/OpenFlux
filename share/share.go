@@ -167,6 +167,9 @@ func (c *Config) Validate() error {
 			if t.Type == "oneme" {
 				return linkError(CodeNotShareable, t.Type, "share: MAX (oneme) cannot be shared: its token belongs to one account", nil)
 			}
+			if t.Type == "script" {
+				return linkError(CodeNotShareable, t.Type, "share: script transports cannot be shared through a link: clients need the script installed", nil)
+			}
 			return linkError(CodeUnknownTransport, t.Type, fmt.Sprintf("share: unknown transport type %q", t.Type), nil)
 		}
 		if t.Type == "direct" {

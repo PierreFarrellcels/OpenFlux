@@ -15,10 +15,11 @@ func TestShareConfigFromExitSpecs(t *testing.T) {
 		{Name: "direct", Type: "direct", Priority: 100, Params: map[string]interface{}{"listen": "0.0.0.0:8445", "is_exit": true}},
 		{Name: "yandex", Type: "yandex", Priority: 50, URL: "https://disk.yandex.ru/i/abc"},
 		{Name: "oneme", Type: "oneme", Priority: 10},
+		{Name: "script", Type: "script", Priority: 20},
 	}
 	c, skipped := shareConfig(specs, true, codecBatched, "a shared secret of 32 characters", "https://disk.yandex.ru/i/abc", "203.0.113.7", nil)
-	if len(skipped) != 1 || !strings.HasPrefix(skipped[0], "oneme") {
-		t.Fatalf("skipped = %v, want the MAX transport only", skipped)
+	if len(skipped) != 2 || !strings.HasPrefix(skipped[0], "oneme") || !strings.HasPrefix(skipped[1], "script") {
+		t.Fatalf("skipped = %v, want the MAX and script transports", skipped)
 	}
 	link, err := share.Encode(c)
 	if err != nil {

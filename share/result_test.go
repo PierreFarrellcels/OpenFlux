@@ -61,6 +61,7 @@ func TestMakeCodes(t *testing.T) {
 		{"classic, short key", Config{Secret: "short", Transports: []Transport{doc}}, CodeShortSecret, "16"},
 		{"codec", Config{Codec: "zip", Transports: []Transport{doc}}, CodeUnknownCodec, "zip"},
 		{"MAX", Config{Transports: []Transport{{Type: "oneme"}}}, CodeNotShareable, "oneme"},
+		{"script", Config{Transports: []Transport{{Type: "script"}}}, CodeNotShareable, "script"},
 		{"unknown", Config{Transports: []Transport{{Type: "carrier-pigeon"}}}, CodeUnknownTransport, "carrier-pigeon"},
 		{"direct, no address", Config{Negotiate: true, Secret: key, Transports: []Transport{{Type: "direct"}}}, CodeDirectNoDial, ""},
 		{"direct, classic", Config{Secret: key, Transports: []Transport{{Type: "direct", Dial: "203.0.113.7:1"}}}, CodeDirectNeedsSession, ""},
